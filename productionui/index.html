@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Phát Sóng Trực Tiếp</title>
+    <style>
+        :root {
+            --primary-color: #007bff; --danger-color: #dc3545;
+            --dark-color: #333; --light-color: #f4f4f4;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            margin: 0; background-color: var(--dark-color); color: var(--light-color);
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; overflow: hidden;
+        }
+        .container {
+            width: 100%; height: 100%; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; padding: 20px;
+        }
+        #setup-view { text-align: center; }
+        #setup-view h1 { color: var(--primary-color); }
+        #stream-name {
+            width: 100%; max-width: 300px; padding: 15px; font-size: 1.2em; text-align: center;
+            border: 2px solid var(--primary-color); border-radius: 8px;
+            background: #444; color: white; margin-bottom: 20px;
+        }
+        .btn {
+            padding: 15px 30px; font-size: 1.2em; border: none; border-radius: 8px;
+            cursor: pointer; font-weight: bold; transition: transform 0.2s;
+        }
+        .btn:active { transform: scale(0.95); }
+        #start-button { background-color: var(--primary-color); color: white; }
+        #streaming-view {
+            display: none; position: relative; width: 100%; height: 100%;
+        }
+        #local-video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+        #controls {
+            position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 15px; align-items: center;
+        }
+        #status-indicator {
+            background: rgba(0,0,0,0.5); padding: 10px 15px; border-radius: 20px;
+        }
+        #stop-button { background-color: var(--danger-color); color: white; }
+    </style>
+</head>
+<body>
+
+    <div id="setup-view" class="container">
+        <h1>🎥 Tạo Luồng Phát Sóng</h1>
+        <p>Nhập tên hoặc ID cho camera của bạn:</p>
+        <input type="text" id="stream-name" placeholder="Ví dụ: Kho_Hang_A">
+        <button id="start-button" class="btn">Mở Camera & Bắt đầu</button>
+    </div>
+
+    <div id="streaming-view" class="container">
+        <video id="local-video" autoplay playsinline muted></video>
+        <div id="controls">
+            <div id="status-indicator">🔴 LIVE</div>
+            <button id="stop-button" class="btn">Dừng</button>
+        </div>
+    </div>
+
+    <script>
+        const setupView = document.getElementById('setup-view');
+        const streamingView = document.getElementById('streaming-view');
+        const startButton = document.getElementById('start-button');
+        const stopButton = document.getElementById('stop-button');
+        const streamNameInput = document.getElementById('stream-name');
+        const videoElement = document.getElementById('local-video');
+        const statusIndicator = document.getElementById('status-indicator');
+
+        // --- CẤU HÌNH QUAN TRỌNG ---
+        // THAY ĐỊA CHỈ IP/DOMAIN CỦA SERVER BẠN VÀO ĐÂY
+        // Ví dụ khi test local: 'ws://192.168.1.10:8000/webrtc/ws'
+        // Ví dụ khi host: 'wss://your-backend-domain.com/webrtc/ws'
+        // Dòng code mới đã được cập nhật
+        const WEBSOCKET_URL = 'wss://b069e55fcd39.ngrok-free.app/webrtc/ws';
+
+        let localStream = null;
+        let ws = null;
+        let peerConnection = null;
+
+        const stunServers = {
+            iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+        };
+
+        async function startStreaming(streamName) {
+            console.log(`Bắt đầu phát sóng với tên: ${streamName}`);
+
+            try {
+                localStream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: 'environment' }, // Ưu tiên camera sau
+                    audio: true
+                });
+                videoElement.srcObject = localStream;
+            } catch (error) {
+                console.error('Lỗi khi truy cập camera:', error);
+                alert('Không thể truy cập camera. Vui lòng cấp quyền (qua HTTPS) và thử lại.');
+                return;
+            }
+
+            connectWebSocket(streamName);
+
+            statusIndicator.textContent = `🔴 LIVE: ${streamName}`;
+            setupView.style.display = 'none';
+            streamingView.style.display = 'flex';
+        }
+
+        function connectWebSocket(streamName) {
+            const fullUrl = `${WEBSOCKET_URL}/${streamName}`;
+            ws = new WebSocket(fullUrl);
+
+            ws.onopen = () => {
+                console.log(`Đã kết nối tới "tổng đài": ${fullUrl}`);
+            };
+
+            ws.onmessage = async (event) => {
+                const message = JSON.parse(event.data);
+                console.log('Nhận được tin nhắn từ tổng đài:', message);
+
+                if (message.answer) {
+                    await peerConnection.setRemoteDescription(new RTCSessionDescription(message.answer));
+                } else if (message.iceCandidate) {
+                    await peerConnection.addIceCandidate(new RTCIceCandidate(message.iceCandidate));
+                } else if (message.type === 'viewer_joined') {
+                    console.log('Có người xem mới, tạo lời mời kết nối...');
+                    createPeerConnectionAndOffer();
+                }
+            };
+
+            ws.onclose = () => {
+                console.log('Mất kết nối với tổng đài WebSocket.');
+                stopStreaming(); // Tự động dừng nếu mất kết nối
+            };
+
+            ws.onerror = (error) => {
+                console.error("Lỗi WebSocket:", error);
+                alert("Không thể kết nối tới server. Vui lòng kiểm tra lại địa chỉ WebSocket.");
+                stopStreaming();
+            }
+        }
+
+        function createPeerConnectionAndOffer() {
+            if (peerConnection) {
+                console.log("Đã có kết nối, đang khởi động lại...");
+                peerConnection.close();
+            }
+            
+            peerConnection = new RTCPeerConnection(stunServers);
+            
+            localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+
+            peerConnection.onicecandidate = (event) => {
+                if (event.candidate) {
+                    ws.send(JSON.stringify({ iceCandidate: event.candidate }));
+                }
+            };
+
+            peerConnection.createOffer()
+                .then(offer => peerConnection.setLocalDescription(offer))
+                .then(() => {
+                    ws.send(JSON.stringify({ offer: peerConnection.localDescription }));
+                    console.log('Đã gửi lời mời (offer) qua tổng đài.');
+                });
+        }
+        
+        function stopStreaming() {
+            if (ws) ws.close();
+            if (peerConnection) peerConnection.close();
+            if (localStream) {
+                localStream.getTracks().forEach(track => track.stop());
+            }
+            videoElement.srcObject = null;
+            localStream = null;
+            ws = null;
+            peerConnection = null;
+
+            streamingView.style.display = 'none';
+            setupView.style.display = 'flex';
+            console.log('Đã dừng phát sóng và dọn dẹp.');
+        }
+
+        startButton.addEventListener('click', () => {
+            const streamName = streamNameInput.value.trim();
+            if (!streamName) {
+                alert('Vui lòng nhập tên cho luồng phát!');
+                return;
+            }
+            startStreaming(streamName);
+        });
+
+        stopButton.addEventListener('click', stopStreaming);
+    </script>
+</body>
+</html>

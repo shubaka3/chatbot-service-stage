@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xem Stream Trực Tiếp</title>
+    <style>
+        /* CSS gần như giống hệt client phát sóng để đồng bộ */
+        :root {
+            --primary-color: #28a745; /* Đổi màu xanh cho người xem */
+            --danger-color: #dc3545;
+            --dark-color: #333;
+            --light-color: #f4f4f4;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            margin: 0; background-color: var(--dark-color); color: var(--light-color);
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+        }
+        .controls {
+            text-align: center;
+            margin-bottom: 20px;
+            background: #444;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        input, button { padding: 12px; font-size: 1em; margin: 5px; border-radius: 5px; border: 1px solid #ccc; }
+        .btn {
+            border: none; cursor: pointer; font-weight: bold;
+            color: white; transition: transform 0.2s;
+        }
+        .btn:active { transform: scale(0.95); }
+        #connectBtn { background-color: var(--primary-color); }
+        #disconnectBtn { background-color: var(--danger-color); }
+
+        #video-container {
+            width: 100%;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        #remote-video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        #status {
+            text-align: center;
+            margin-top: 15px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="controls">
+            <h1>📺 Xem Stream</h1>
+            <input type="text" id="roomName" placeholder="Nhập tên stream (ví dụ: Kho_Hang_A)">
+            <button id="connectBtn" class="btn">Xem</button>
+            <button id="disconnectBtn" class="btn" disabled>Dừng</button>
+        </div>
+
+        <div id="video-container">
+            <video id="remote-video" autoplay playsinline></video>
+        </div>
+        <p id="status">Vui lòng nhập tên stream và nhấn "Xem".</p>
+    </div>
+
+    <script>
+        const roomNameInput = document.getElementById('roomName');
+        const connectBtn = document.getElementById('connectBtn');
+        const disconnectBtn = document.getElementById('disconnectBtn');
+        const remoteVideo = document.getElementById('remote-video');
+        const statusDiv = document.getElementById('status');
+
+        // --- CẤU HÌNH QUAN TRỌNG ---
+        // ĐỊA CHỈ NÀY PHẢI GIỐNG HỆT ĐỊA CHỈ TRONG FILE INDEX.HTML
+        // Ví dụ khi test local: 'ws://192.168.1.10:8000/webrtc/ws'
+        // Ví dụ khi host: 'wss://your-backend-domain.com/webrtc/ws'
+        // Dòng code mới đã được cập nhật
+        const WEBSOCKET_URL = 'wss://b069e55fcd39.ngrok-free.app/webrtc/ws';
+        
+        let ws = null;
+        let peerConnection = null;
+
+        const stunServers = {
+            iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+        };
+
+        function connect() {
+            const roomName = roomNameInput.value.trim();
+            if (!roomName) {
+                alert('Vui lòng nhập tên stream.');
+                return;
+            }
+
+            statusDiv.textContent = `Đang kết nối tới phòng '${roomName}'...`;
+            const fullUrl = `${WEBSOCKET_URL}/${roomName}`;
+            ws = new WebSocket(fullUrl);
+
+            ws.onopen = () => {
+                console.log(`Đã kết nối tới "tổng đài": ${fullUrl}`);
+                statusDiv.textContent = "Đã kết nối, đang chờ tín hiệu video...";
+                // Gửi một tin nhắn để báo cho người phát sóng biết có người xem mới
+                ws.send(JSON.stringify({ type: 'viewer_joined' }));
+
+                connectBtn.disabled = true;
+                disconnectBtn.disabled = false;
+            };
+
+            ws.onmessage = async (event) => {
+                const message = JSON.parse(event.data);
+                console.log('Nhận được tin nhắn từ tổng đài:', message);
+
+                if (message.offer) {
+                    // Nhận được "lời mời" từ người phát sóng
+                    peerConnection = new RTCPeerConnection(stunServers);
+
+                    // Khi nhận được track video/audio từ người phát, hiển thị nó lên thẻ <video>
+                    peerConnection.ontrack = (event) => {
+                        console.log("Đã nhận được luồng video!");
+                        remoteVideo.srcObject = event.streams[0];
+                        statusDiv.textContent = `Đang xem stream: ${roomName}`;
+                    };
+                    
+                    peerConnection.onicecandidate = (event) => {
+                        if (event.candidate) {
+                            ws.send(JSON.stringify({ iceCandidate: event.candidate }));
+                        }
+                    };
+
+                    await peerConnection.setRemoteDescription(new RTCSessionDescription(message.offer));
+
+                    // Tạo "câu trả lời" và gửi lại cho người phát sóng
+                    const answer = await peerConnection.createAnswer();
+                    await peerConnection.setLocalDescription(answer);
+                    ws.send(JSON.stringify({ answer: answer }));
+                    console.log('Đã gửi câu trả lời (answer) qua tổng đài.');
+
+                } else if (message.iceCandidate) {
+                    await peerConnection.addIceCandidate(new RTCIceCandidate(message.iceCandidate));
+                }
+            };
+
+            ws.onclose = () => {
+                statusDiv.textContent = "Mất kết nối. Vui lòng thử lại.";
+                disconnect();
+            };
+
+            ws.onerror = (error) => {
+                console.error("Lỗi WebSocket:", error);
+                statusDiv.textContent = "Lỗi kết nối tới server.";
+                disconnect();
+            };
+        }
+
+        function disconnect() {
+            if (ws) ws.close();
+            if (peerConnection) peerConnection.close();
+            remoteVideo.srcObject = null;
+            ws = null;
+            peerConnection = null;
+            
+            connectBtn.disabled = false;
+            disconnectBtn.disabled = true;
+            statusDiv.textContent = "Vui lòng nhập tên stream và nhấn 'Xem'.";
+            console.log('Đã ngắt kết nối và dọn dẹp.');
+        }
+
+        connectBtn.addEventListener('click', connect);
+        disconnectBtn.addEventListener('click', disconnect);
+    </script>
+</body>
+</html>

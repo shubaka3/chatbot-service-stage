@@ -1,0 +1,96 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# ===== Virtual environment =====
+venv/
+.env/
+env/
+.venv/
+ENV/
+env.bak/
+
+# ===== Distribution / Packaging =====
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# ===== Logs & Databases =====
+*.log
+*.sqlite3
+*.db
+
+# ===== Jupyter / IPython =====
+.ipynb_checkpoints/
+profile_default/
+.ipython/
+
+# ===== PyInstaller =====
+*.manifest
+*.spec
+
+# ===== Unit test / Coverage =====
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# ===== Editors / IDEs =====
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ===== OS Files =====
+.DS_Store
+Thumbs.db
+
+# ===== Environment & Secrets =====
+*.env
+*.env.*
+.env.local
+.envrc
+secrets.json
+
+# ===== Temporary files =====
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+
+# ===== Docker =====
+docker-compose.override.yml
+*.pid
+*.sock
+
+# ===== Milvus / Vector DB cache =====
+milvus_data/
+*.index
+*.npy
+
+# ===== Model / AI Cache =====
+openai_cache/
+huggingface_cache/
+.cache/
+models/
+*.pt
+*.bin
+*.ckpt
+
+# ===== Node / Frontend (if any) =====
+node_modules/
+package-lock.json
+dist/

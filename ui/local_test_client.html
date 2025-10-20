@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Test Client</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; font-size: 16px; }
+        .container { max-width: 600px; margin: auto; }
+        input, button { padding: 10px; font-size: 1em; margin: 5px 0; border-radius: 5px; border: 1px solid #ccc; }
+        #controls, #messaging { margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; }
+        #messages { height: 300px; overflow-y: scroll; border: 1px solid #eee; padding: 10px; background: #f9f9f9; }
+        pre { white-space: pre-wrap; word-wrap: break-word; }
+        .sent { color: blue; }
+        .received { color: green; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>WebSocket Test Client (Local)</h1>
+        
+        <div id="controls">
+            <h3>Kết nối</h3>
+            <label for="roomName">Tên Phòng:</label>
+            <input type="text" id="roomName" value="cam01">
+            <button id="connectBtn">Kết nối</button>
+            <button id="disconnectBtn" disabled>Ngắt kết nối</button>
+        </div>
+
+        <div id="messaging" style="display: none;">
+            <h3>Gửi Tin Nhắn (JSON)</h3>
+            <input type="text" id="messageInput" placeholder='{"type": "test", "data": "hello"}'>
+            <button id="sendBtn">Gửi tin nhắn</button>
+        </div>
+
+        <h3>Log Tin Nhắn</h3>
+        <div id="messages"></div>
+    </div>
+
+    <script>
+        // --- LOGIC ---
+        const roomNameInput = document.getElementById('roomName');
+        const connectBtn = document.getElementById('connectBtn');
+        const disconnectBtn = document.getElementById('disconnectBtn');
+        const messageInput = document.getElementById('messageInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const messagesDiv = document.getElementById('messages');
+        const messagingDiv = document.getElementById('messaging');
+
+        let ws = null;
+
+        function logMessage(message, type) {
+            const p = document.createElement('p');
+            p.innerHTML = `<strong>[${type.toUpperCase()}]</strong>: <pre>${message}</pre>`;
+            p.className = type;
+            messagesDiv.appendChild(p);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        connectBtn.addEventListener('click', () => {
+            const roomName = roomNameInput.value.trim();
+            if (!roomName) {
+                alert('Vui lòng nhập tên phòng.');
+                return;
+            }
+            
+            // Thay đổi IP nếu BE của bạn không chạy ở localhost
+            const WEBSOCKET_URL = `ws://127.0.0.1:8000/webrtc/ws/${roomName}`;
+            ws = new WebSocket(WEBSOCKET_URL);
+
+            ws.onopen = () => {
+                logMessage(`Đã kết nối tới phòng '${roomName}'`, 'info');
+                connectBtn.disabled = true;
+                disconnectBtn.disabled = false;
+                messagingDiv.style.display = 'block';
+            };
+
+            ws.onmessage = (event) => {
+                logMessage(event.data, 'received');
+            };
+
+            ws.onclose = () => {
+                logMessage(`Đã ngắt kết nối khỏi phòng '${roomName}'`, 'info');
+                connectBtn.disabled = false;
+                disconnectBtn.disabled = true;
+                messagingDiv.style.display = 'none';
+                ws = null;
+            };
+
+            ws.onerror = (error) => {
+                logMessage(`Lỗi WebSocket: ${JSON.stringify(error, ["message", "name"])}`, 'error');
+            };
+        });
+
+        disconnectBtn.addEventListener('click', () => {
+            if (ws) ws.close();
+        });
+
+        sendBtn.addEventListener('click', () => {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                const message = messageInput.value.trim();
+                try {
+                    // Đảm bảo tin nhắn là JSON hợp lệ trước khi gửi
+                    JSON.parse(message); 
+                    ws.send(message);
+                    logMessage(message, 'sent');
+                } catch (e) {
+                    alert('Tin nhắn không phải là JSON hợp lệ!');
+                }
+            } else {
+                alert('Chưa kết nối tới WebSocket.');
+            }
+        });
+    </script>
+</body>
+</html>
