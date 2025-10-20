@@ -3,6 +3,7 @@
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 # Import các router từ thư mục api
 from api import webrtc_signaling, file_processing
@@ -23,6 +24,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.mount("/ui", StaticFiles(directory="ui"), name="ui")
+
+# 2. UI production
+app.mount("/productionui", StaticFiles(directory="productionui"), name="productionui")
 
 # --- GẮN CÁC ROUTER VÀO ỨNG DỤNG CHÍNH ---
 # Gắn router xử lý WebRTC Signaling
