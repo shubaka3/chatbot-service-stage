@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 # Import các router từ thư mục api
-from api import webrtc_signaling, file_processing
+from api import file_processing
 
 # --- KHỞI TẠO ỨNG DỤNG FASTAPI CHÍNH ---
 app = FastAPI(
@@ -30,13 +30,6 @@ app.mount("/ui", StaticFiles(directory="ui"), name="ui")
 # 2. UI production
 app.mount("/productionui", StaticFiles(directory="productionui"), name="productionui")
 
-# --- GẮN CÁC ROUTER VÀO ỨNG DỤNG CHÍNH ---
-# Gắn router xử lý WebRTC Signaling
-app.include_router(
-    webrtc_signaling.router,
-    prefix="/webrtc",  # Tất cả các URL trong router này sẽ có tiền tố /webrtc
-    tags=["WebRTC Signaling"] # Gom nhóm các API trong trang docs
-)
 
 # Gắn router xử lý file
 app.include_router(

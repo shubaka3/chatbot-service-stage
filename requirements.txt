@@ -3,3 +3,4 @@ uvicorn[standard]
 httpx
 fpdf2
 python-multipart
+Unidecode
