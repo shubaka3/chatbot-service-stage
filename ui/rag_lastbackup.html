@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trình xử lý File PDF</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        #drop-zone {
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        /* Style cho thanh tiến trình */
+        #progress-bar {
+            transition: width 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-xl bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div class="p-8">
+            <div class="text-center mb-8">
+                <div class="inline-block bg-blue-100 text-blue-600 p-3 rounded-full mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                    </svg>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-800">Trình xử lý & Nén File</h1>
+                <p class="text-gray-500 mt-2">Tải lên file tài liệu, hệ thống sẽ tự động xử lý và tải về file .zip chứa kết quả.</p>
+            </div>
+
+            <form id="uploadForm">
+                
+                <div class="mb-4">
+                    <label for="chapterNameInput" class="block text-sm font-medium text-gray-700 mb-1">
+                        Tên Chương (Dùng để đặt tên file ZIP) <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="chapterNameInput" name="chapter_name" required
+                        placeholder="Ví dụ: Chương 1 - Thông tin cơ bản"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-shadow">
+                </div>
+                <label for="fileInput" id="drop-zone" class="cursor-pointer flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 hover:bg-gray-100">
+                    <div class="flex flex-col items-center justify-center pt-5 pb-6 text-center">
+                        <svg class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-4-4V7a4 4 0 014-4h.5a3.5 3.5 0 017 0H17a4 4 0 014 4v5a4 4 0 01-4 4H7z"></path></svg>
+                        <p id="file-name" class="mb-2 text-sm text-gray-500"><span class="font-semibold">Nhấn để chọn file</span> hoặc kéo thả vào đây</p>
+                        <p class="text-xs text-gray-500">Giới hạn 1 file (PDF, DOC, DOCX, TXT...)</p>
+                    </div>
+                    <input id="fileInput" type="file" class="hidden" accept=".pdf,.doc,.docx,.txt" />
+                </label>
+                
+                <button type="submit" id="submitBtn" class="w-full mt-6 bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed">
+                    Xử lý & Nén File
+                </button>
+            </form>
+
+            <div id="status-area" class="mt-6 text-left hidden">
+                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-2">
+                    <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+                </div>
+                <span id="status-text" class="text-sm text-gray-600 font-medium">Đang chờ...</span>
+                <p id="error-message" class="hidden text-red-500 font-medium mt-2"></p>
+            </div>
+        </div>
+    </div>
+
+<script>
+    const uploadForm = document.getElementById('uploadForm');
+    const fileInput = document.getElementById('fileInput');
+    const chapterNameInput = document.getElementById('chapterNameInput'); // Lấy trường input mới
+    const dropZone = document.getElementById('drop-zone');
+    const fileNameDisplay = document.getElementById('file-name');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    const statusArea = document.getElementById('status-area');
+    const progressBar = document.getElementById('progress-bar');
+    const statusText = document.getElementById('status-text');
+    const errorMessage = document.getElementById('error-message');
+
+    // CẬP NHẬT: Sử dụng đường dẫn tuyệt đối đến API của bạn
+    const API_ENDPOINT = 'http://127.0.0.1:8000/files/process-and-zip/';
+
+    // --- Xử lý sự kiện kéo thả và chọn file ---
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, e => { e.preventDefault(); e.stopPropagation(); }, false);
+    });
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, () => dropZone.classList.add('bg-blue-50', 'border-blue-400'), false);
+    });
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, () => dropZone.classList.remove('bg-blue-50', 'border-blue-400'), false);
+    });
+    dropZone.addEventListener('drop', e => handleFiles(e.dataTransfer.files), false);
+    fileInput.addEventListener('change', () => handleFiles(fileInput.files));
+
+    function handleFiles(files) {
+        if (files.length > 0) {
+            fileInput.files = files;
+            fileNameDisplay.textContent = files[0].name;
+            fileNameDisplay.classList.remove('text-gray-500');
+            fileNameDisplay.classList.add('text-blue-600', 'font-semibold');
+        }
+    }
+
+    // --- Xử lý sự kiện submit form bằng XMLHttpRequest (để có progress bar) ---
+    uploadForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const file = fileInput.files[0];
+        const chapterName = chapterNameInput.value.trim(); // Lấy giá trị tên chương
+
+        if (!file) {
+            alert('Vui lòng chọn một file để upload.');
+            return;
+        }
+        if (!chapterName) {
+            alert('Vui lòng điền Tên Chương.');
+            chapterNameInput.focus();
+            return;
+        }
+
+        resetStatus();
+        submitBtn.disabled = true;
+
+        const formData = new FormData();
+        formData.append('file', file);
+        // THÊM TÊN CHƯƠNG VÀO FORM DATA
+        formData.append('chapter_name', chapterName); 
+
+        const xhr = new XMLHttpRequest();
+
+        // Theo dõi tiến trình upload
+        xhr.upload.addEventListener('progress', (event) => {
+            if (event.lengthComputable) {
+                const percentComplete = Math.round((event.loaded / event.total) * 100);
+                progressBar.style.width = percentComplete + '%';
+                statusText.textContent = `Đang tải lên... ${percentComplete}%`;
+            }
+        });
+
+        // Xử lý khi upload hoàn tất và server đang xử lý
+        xhr.addEventListener('loadstart', () => {
+             statusArea.classList.remove('hidden');
+             // CẬP NHẬT TRẠNG THÁI: Tải lên xong, đang xử lý
+             progressBar.style.width = '100%'; 
+             statusText.textContent = 'Đang xử lý nội dung...';
+        });
+        
+        // Xử lý khi server trả về kết quả
+        xhr.addEventListener('load', () => {
+            if (xhr.status === 200) {
+                // Thành công: server trả về file zip
+                statusText.textContent = 'Hoàn tất! File đang được tải về...';
+                
+                // Tự động tải file zip về
+                const blob = xhr.response; 
+                // Lấy tên file từ header Content-Disposition nếu có (tùy chọn)
+                const contentDisposition = xhr.getResponseHeader('Content-Disposition');
+                let defaultFilename = 'tong_hop_ket_qua.zip';
+                if (contentDisposition) {
+                    const match = contentDisposition.match(/filename="(.+)"/);
+                    if (match) {
+                        defaultFilename = match[1];
+                    }
+                }
+
+                const downloadUrl = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = downloadUrl;
+                a.download = defaultFilename; // Sử dụng tên file từ server
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(downloadUrl);
+                document.body.removeChild(a);
+                
+                // Sau khi tải về, có thể reset form
+                // setTimeout(() => location.reload(), 2000); 
+
+            } else {
+                // Thất bại: server trả về lỗi JSON
+                const reader = new FileReader();
+                reader.onload = function() {
+                    try {
+                        const errorJson = JSON.parse(reader.result);
+                        showError(errorJson.detail || `Lỗi server: ${xhr.status}`);
+                    } catch (e) {
+                        showError(`Lỗi không xác định từ server: ${xhr.status}`);
+                    }
+                }
+                reader.readAsText(xhr.response);
+            }
+        });
+
+        // Xử lý lỗi mạng
+        xhr.addEventListener('error', () => {
+            showError('Lỗi mạng. Không thể kết nối đến server.');
+        });
+        
+        // Luôn kích hoạt lại nút submit sau khi hoàn tất
+        xhr.addEventListener('loadend', () => {
+            submitBtn.disabled = false;
+        });
+
+        // Cấu hình và gửi request
+        xhr.open('POST', API_ENDPOINT);
+        xhr.responseType = 'blob'; 
+        xhr.send(formData);
+    });
+
+    // --- Các hàm trợ giúp cho giao diện ---
+    function resetStatus() {
+        statusArea.classList.add('hidden');
+        progressBar.style.width = '0%';
+        progressBar.classList.remove('bg-red-500');
+        progressBar.classList.add('bg-blue-600');
+        statusText.textContent = 'Đang chờ...';
+        errorMessage.classList.add('hidden');
+        errorMessage.textContent = '';
+    }
+
+    function showError(message) {
+        progressBar.style.width = '100%';
+        progressBar.classList.add('bg-red-500');
+        progressBar.classList.remove('bg-blue-600');
+        statusText.textContent = 'Đã xảy ra lỗi!';
+        errorMessage.textContent = message;
+        errorMessage.classList.remove('hidden');
+    }
+</script>
+
+</body>
+</html>
