@@ -1,0 +1,483 @@
+nohup: ignoring input
+INFO:     Will watch for changes in these directories: ['/home/thienhp/Projects/chatbot-service-stage']
+INFO:     Uvicorn running on http://0.0.0.0:3031 (Press CTRL+C to quit)
+INFO:     Started reloader process [492671] using WatchFiles
+INFO:     Started server process [492673]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     172.253.192.242:59709 - "GET / HTTP/1.1" 200 OK
+INFO:     113.161.92.38:55661 - "GET /docs HTTP/1.1" 200 OK
+INFO:     113.161.92.38:55661 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     113.161.92.38:55660 - "GET /ui/rag.html HTTP/1.1" 200 OK
+INFO:     172.253.192.247:33952 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+INFO:     165.154.163.10:39034 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     50.116.26.161:56536 - "GET / HTTP/1.1" 200 OK
+INFO:     172.104.11.46:49528 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+INFO:     36.156.22.4:34414 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     113.161.92.38:49912 - "GET / HTTP/1.1" 200 OK
+INFO:     113.161.92.38:49912 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     113.161.92.38:49913 - "GET /docs HTTP/1.1" 200 OK
+INFO:     113.161.92.38:49913 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     113.161.92.38:49990 - "POST /files/process-and-zip/ HTTP/1.1" 200 OK
+INFO:     113.161.92.38:50112 - "POST /files/process-and-zip/ HTTP/1.1" 200 OK
+INFO:     113.161.92.38:50290 - "POST /files/process-and-zip/ HTTP/1.1" 200 OK
+INFO:     183.99.188.66:61000 - "PUT /SDK/webLanguage HTTP/1.0" 404 Not Found
+INFO:     172.236.228.245:33108 - "GET / HTTP/1.1" 200 OK
+INFO:     183.99.188.66:61000 - "PUT /SDK/webLanguage HTTP/1.0" 404 Not Found
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     23.95.132.56:62871 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     183.99.188.66:61000 - "PUT /SDK/webLanguage HTTP/1.0" 404 Not Found
+INFO:     45.56.79.53:46512 - "GET / HTTP/1.1" 200 OK
+INFO:     172.236.228.224:28110 - "GET / HTTP/1.1" 200 OK
+INFO:     45.79.181.94:59128 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     152.32.191.47:2026 - "GET / HTTP/1.1" 200 OK
+INFO:     152.32.191.47:2176 - "GET / HTTP/1.1" 200 OK
+INFO:     152.32.191.47:2196 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     87.236.176.238:47897 - "GET / HTTP/1.1" 200 OK
+INFO:     183.99.188.66:61000 - "PUT /SDK/webLanguage HTTP/1.0" 404 Not Found
+INFO:     172.236.228.193:57282 - "GET / HTTP/1.1" 200 OK
+INFO:     121.165.105.46:61000 - "PUT /SDK/webLanguage HTTP/1.0" 404 Not Found
+INFO:     45.79.115.59:51676 - "GET / HTTP/1.1" 200 OK
+INFO:     172.236.228.229:21118 - "GET / HTTP/1.1" 200 OK
+INFO:     87.236.176.61:43407 - "GET / HTTP/1.1" 200 OK
+INFO:     173.194.92.182:43794 - "GET / HTTP/1.1" 200 OK
+INFO:     113.161.92.38:62412 - "GET / HTTP/1.1" 200 OK
+INFO:     113.161.92.38:62412 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     185.247.137.228:58745 - "GET / HTTP/1.1" 200 OK
+INFO:     87.236.176.168:39091 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+INFO:     172.104.11.51:7914 - "GET / HTTP/1.1" 200 OK
+INFO:     121.165.105.46:61000 - "PUT /SDK/webLanguage HTTP/1.0" 404 Not Found
+INFO:     185.247.137.104:47233 - "GET / HTTP/1.1" 200 OK
+INFO:     185.247.137.157:55481 - "GET / HTTP/1.1" 200 OK
+INFO:     87.236.176.59:47625 - "GET / HTTP/1.1" 200 OK
+INFO:     15.235.227.46:45876 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     165.154.163.10:44814 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     45.33.14.197:58472 - "GET / HTTP/1.1" 200 OK
+INFO:     172.235.40.131:6048 - "GET / HTTP/1.1" 200 OK
+INFO:     172.236.228.229:47946 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     185.247.137.196:37317 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+INFO:     87.236.176.227:45971 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+INFO:     121.165.105.46:61000 - "PUT /SDK/webLanguage HTTP/1.0" 404 Not Found
+INFO:     172.236.228.115:20952 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+INFO:     121.165.105.46:61000 - "PUT /SDK/webLanguage HTTP/1.0" 404 Not Found
+INFO:     142.91.102.186:50830 - "GET / HTTP/1.1" 200 OK
+INFO:     45.33.109.17:50324 - "GET / HTTP/1.1" 200 OK
+INFO:     172.104.11.4:42654 - "GET / HTTP/1.1" 200 OK
+INFO:     87.236.176.102:60253 - "GET / HTTP/1.1" 200 OK
+INFO:     121.165.105.46:61000 - "PUT /SDK/webLanguage HTTP/1.0" 404 Not Found
+INFO:     185.247.137.16:49993 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     23.95.132.56:49164 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     66.228.53.157:17078 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+INFO:     121.165.105.46:61000 - "PUT /SDK/webLanguage HTTP/1.0" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     15.235.236.87:58308 - "GET / HTTP/1.1" 200 OK
+INFO:     87.236.176.132:53987 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     45.79.115.134:40677 - "GET / HTTP/1.1" 200 OK
+INFO:     121.165.105.46:61000 - "PUT /SDK/webLanguage HTTP/1.0" 404 Not Found
+INFO:     172.105.128.12:42476 - "GET / HTTP/1.1" 200 OK
+INFO:     192.155.90.118:56130 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+INFO:     185.247.137.171:60071 - "GET / HTTP/1.1" 200 OK
+INFO:     183.99.188.66:61000 - "PUT /SDK/webLanguage HTTP/1.0" 404 Not Found
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     148.153.188.246:57760 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     172.236.228.202:51254 - "GET / HTTP/1.1" 200 OK
+INFO:     87.236.176.44:47553 - "GET / HTTP/1.1" 200 OK
+INFO:     121.165.105.46:61000 - "PUT /SDK/webLanguage HTTP/1.0" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     121.165.105.46:61000 - "PUT /SDK/webLanguage HTTP/1.0" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     45.33.109.8:59829 - "GET / HTTP/1.1" 200 OK
+INFO:     45.79.181.179:26046 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+INFO:     87.236.176.27:52985 - "GET / HTTP/1.1" 200 OK
+INFO:     183.99.188.66:61000 - "PUT /SDK/webLanguage HTTP/1.0" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     47.103.107.210:31390 - "GET / HTTP/1.0" 200 OK
+INFO:     47.103.107.210:31398 - "OPTIONS / HTTP/1.0" 405 Method Not Allowed
+INFO:     47.103.107.210:31404 - "OPTIONS / HTTP/1.0" 405 Method Not Allowed
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     47.103.107.210:31514 - "GET /nice%20ports%2C/Trinity.txt.bak HTTP/1.0" 404 Not Found
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     222.186.13.130:57852 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     152.32.150.215:41720 - "GET / HTTP/1.1" 200 OK
+INFO:     152.32.150.215:32900 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     152.32.150.215:32910 - "GET /robots.txt HTTP/1.1" 404 Not Found
+INFO:     152.32.150.215:32926 - "GET /sitemap.xml HTTP/1.1" 404 Not Found
+INFO:     152.32.150.215:32928 - "GET /config.json HTTP/1.1" 404 Not Found
+INFO:     152.32.150.215:32934 - "GET /sse HTTP/1.1" 404 Not Found
+INFO:     152.32.150.215:32950 - "GET /mcp HTTP/1.1" 404 Not Found
+INFO:     152.32.150.215:32960 - "GET /mcp-sse HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     222.186.13.130:46228 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     172.253.15.231:38221 - "GET / HTTP/1.1" 200 OK
+INFO:     172.253.15.231:38221 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+WARNING:  WatchFiles detected changes in 'api/webrtc_signaling.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [492673]
+Process SpawnProcess-2:
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/server.py", line 67, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/_compat.py", line 60, in asyncio_run
+    return loop.run_until_complete(main)
+  File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/server.py", line 71, in serve
+    await self._serve(sockets)
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/server.py", line 78, in _serve
+    config.load()
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/config.py", line 439, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/thienhp/Projects/chatbot-service-stage/main.py", line 9, in <module>
+    from api import webrtc_signaling, file_processing
+ImportError: cannot import name 'webrtc_signaling' from 'api' (unknown location)
+WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
+Process SpawnProcess-3:
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/server.py", line 67, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/_compat.py", line 60, in asyncio_run
+    return loop.run_until_complete(main)
+  File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/server.py", line 71, in serve
+    await self._serve(sockets)
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/server.py", line 78, in _serve
+    config.load()
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/config.py", line 439, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/thienhp/Projects/chatbot-service-stage/main.py", line 31, in <module>
+    app.mount("/productionui", StaticFiles(directory="productionui"), name="productionui")
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/starlette/staticfiles.py", line 56, in __init__
+    raise RuntimeError(f"Directory '{directory}' does not exist")
+RuntimeError: Directory 'productionui' does not exist
+WARNING:  WatchFiles detected changes in 'api/ai_evaluation.py'. Reloading...
+Process SpawnProcess-4:
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/server.py", line 67, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/_compat.py", line 60, in asyncio_run
+    return loop.run_until_complete(main)
+  File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/server.py", line 71, in serve
+    await self._serve(sockets)
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/server.py", line 78, in _serve
+    config.load()
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/config.py", line 439, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/thienhp/Projects/chatbot-service-stage/main.py", line 31, in <module>
+    app.mount("/productionui", StaticFiles(directory="productionui"), name="productionui")
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/starlette/staticfiles.py", line 56, in __init__
+    raise RuntimeError(f"Directory '{directory}' does not exist")
+RuntimeError: Directory 'productionui' does not exist
+WARNING:  WatchFiles detected changes in 'cam.py'. Reloading...
+Process SpawnProcess-5:
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/server.py", line 67, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/_compat.py", line 60, in asyncio_run
+    return loop.run_until_complete(main)
+  File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/server.py", line 71, in serve
+    await self._serve(sockets)
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/server.py", line 78, in _serve
+    config.load()
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/config.py", line 439, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/thienhp/Projects/chatbot-service-stage/main.py", line 31, in <module>
+    app.mount("/productionui", StaticFiles(directory="productionui"), name="productionui")
+  File "/home/thienhp/Projects/chatbot-service-stage/venv/lib/python3.10/site-packages/starlette/staticfiles.py", line 56, in __init__
+    raise RuntimeError(f"Directory '{directory}' does not exist")
+RuntimeError: Directory 'productionui' does not exist
